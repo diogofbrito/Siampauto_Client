@@ -1,0 +1,7 @@
+.glass-effect {
+  background-color: rgba(0, 0, 0, 0.2); /* Cor de fundo com transparência */
+  backdrop-filter: blur(10px);                /* Efeito de desfoque */
+  border-radius: 1rem;                       /* Cantos arredondados */
+  border: 1px solid rgba(255, 255, 255, 0.1);  /* Borda sutil */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);   /* Sombra suave */
+}
