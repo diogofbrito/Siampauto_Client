@@ -1,66 +1,77 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useFilters } from '../../contexts/SearchFilterContext';
+import React, { useState, useEffect } from 'react';
 import { useVehicles } from '../../contexts/VehiclesContext';
-import './style.css';
+import { Vehicle } from '../../types/vehicle';
+import { Select, SelectItem } from '@nextui-org/select';
+import { Button } from '@nextui-org/react';
 
-export function CarSearchFilter() {
-	const { state, dispatch } = useFilters();
-	const { vehicles, filteredVehicles, loading } = useVehicles();
 
-	const getUniqueValues = (vehicles: any[], key: string) => {
-		const uniqueValues = vehicles.map(vehicle => vehicle[key]);
-		return [...new Set(uniqueValues)];
+interface CarSearchFilterProps {
+	onSearch: (filteredVehicles: Vehicle[]) => void;
+}
+
+export function CarSearchFilter({ onSearch }: CarSearchFilterProps) {
+	const { vehicles } = useVehicles();
+
+	const [brand, setBrand] = useState<string>('');
+	const [model, setModel] = useState<string>('');
+	const [fuel, setFuel] = useState<string>('');
+
+	const [availableModels, setAvailableModels] = useState<string[]>([]);
+
+	useEffect(() => {
+		if (brand) {
+			const models = vehicles.filter(vehicle => vehicle.Brand === brand).map(vehicle => vehicle.Model);
+			setAvailableModels([...new Set(models)]);
+			setModel('');
+		} else {
+			setAvailableModels([]);
+		}
+	}, [brand, vehicles]);
+
+	const handleSearch = () => {
+		const filteredVehicles = vehicles.filter(vehicle => {
+			const matchesBrand = brand ? vehicle.Brand === brand : true;
+			const matchesModel = model ? vehicle.Model === model : true;
+			const matchesFuel = fuel ? vehicle.Fuel === fuel : true;
+
+			return matchesBrand && matchesModel && matchesFuel;
+		});
+
+		onSearch(filteredVehicles);
 	};
 
-	const uniqueBrands = getUniqueValues(vehicles, 'Brand');
-	const uniqueModels = getUniqueValues(vehicles, 'Model');
-	const uniqueFuels = getUniqueValues(vehicles, 'Fuel');
-
-	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		const { name, value } = event.target;
-		dispatch({ type: `SET_${name.toUpperCase()}`, payload: value });
-	};
+	const uniqueBrands = [...new Set(vehicles.map(vehicle => vehicle.Brand))];
+	const uniqueFuels = [...new Set(vehicles.map(vehicle => vehicle.Fuel))];
 
 	return (
-		<div className='rounded-xl p-8 glass-effect'>
-			<h2 className='text-2xl text-white font-bold mb-4'>Que Viatura Procura?</h2>
+		<div className='p-4 flex gap-4'>
+			<Select value={brand} label='Selecione uma marca' onChange={e => setBrand(e)} placeholder='Selecione uma marca' className='max-w-xs'>
+				{uniqueBrands.map(brand => (
+					<SelectItem key={brand} value={brand} textValue={brand}>
+						{brand}
+					</SelectItem>
+				))}
+			</Select>
 
-			<div className='grid grid-cols-4 gap-6'>
-				<div>
-					<select name='brand' value={state.brand} onChange={handleChange} className='bg-gray-500 text-white rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full'>
-						<option value=''>Marca</option>
-						{uniqueBrands.map(brand => (
-							<option key={brand} value={brand}>
-								{brand}
-							</option>
-						))}
-					</select>
-				</div>
+			<Select value={model} label='Selecione um modelo' onChange={e => setModel(e)} placeholder='Selecione um modelo' disabled={!brand} className='max-w-xs'>
+				{availableModels.map(model => (
+					<SelectItem key={model} value={model} textValue={model}>
+						{model}
+					</SelectItem>
+				))}
+			</Select>
 
-				<div>
-					<select name='model' value={state.model} onChange={handleChange} className='bg-gray-500 text-white rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full'>
-						<option value=''>Modelo</option>
-						{uniqueModels.map(model => (
-							<option key={model} value={model}>
-								{model}
-							</option>
-						))}
-					</select>
-				</div>
+			<Select value={fuel} label='Selecione o tipo de combustível' onChange={e => setFuel(e)} placeholder='Selecione o tipo de combustível' className='max-w-xs'>
+				{uniqueFuels.map(fuel => (
+					<SelectItem key={fuel} value={fuel} textValue={fuel}>
+						{fuel}
+					</SelectItem>
+				))}
+			</Select>
 
-				<div>
-					<select name='fuel' value={state.fuel} onChange={handleChange} className='bg-gray-500 text-white rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full'>
-						<option value=''>Combustível</option>
-						{uniqueFuels.map(fuel => (
-							<option key={fuel} value={fuel}>
-								{fuel}
-							</option>
-						))}
-					</select>
-				</div>
-
-				<button className='bg-gray-500 text-white rounded-xl py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500'>Ver {loading ? '...' : filteredVehicles.length} viaturas</button>
-			</div>
+			<Button onClick={handleSearch} className='lg'>
+				Ver {vehicles.length} veículos
+			</Button>
 		</div>
 	);
 }

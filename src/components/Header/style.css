@@ -1,27 +1,27 @@
 .navbar {
-	padding: 2rem;
+	padding: 2rem 3rem;
 	position: fixed;
 	font-size: 1.25rem;
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 10;
+	color: white;
 }
 
 .navbar__item {
 	display: flex;
-    justify-content: space-between;
+	justify-content: space-between;
 	position: relative;
-
+	padding: 0.5rem;
+	border-radius: 2rem;
 }
 
 .radius {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
-	background-color: rgba(197, 197, 197, 0.2);
+	background-color: #009342;
 	border-radius: 34px;
-	padding: 9px 18px 8px 18px;
+	padding: 5px 18px 5px 18px;
 	text-align: center;
-	border: 0px solid var(--black);
 }
-

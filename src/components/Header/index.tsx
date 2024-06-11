@@ -1,19 +1,51 @@
+import { useAuth } from '../../contexts/AuthContext';
 import './style.css';
-import { NavLink } from 'react-router-dom';
-import { LoginBtn } from '../LoginBtn/index';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from '@nextui-org/react';
 
 export function Header() {
+	const { isLogged, logout } = useAuth();
 	return (
-		<div className='navbar'>
-			<div className='navbar__item'>
-				<NavLink className='radius' to='/'>
-					menu
-				</NavLink>
-				<NavLink className='' to='/'>
-					siampauto
-				</NavLink>
-				<LoginBtn />
-			</div>
-		</div>
+		<>
+			<Navbar shouldHideOnScroll>
+				<NavbarBrand>
+					<p className='font-bold text-inherit'>ACME</p>
+				</NavbarBrand>
+				<NavbarContent className='hidden sm:flex gap-6' justify='center'>
+					<NavbarItem>
+						<Link color='foreground' href='/Stock'>
+							As nossas viaturas
+						</Link>
+					</NavbarItem>
+					<NavbarItem isActive>
+						<Link href='#' aria-current='page'>
+							Serviços
+						</Link>
+					</NavbarItem>
+					<NavbarItem>
+						<Link color='foreground' href='#'>
+							Contactos
+						</Link>
+					</NavbarItem>
+				</NavbarContent>
+				<NavbarContent justify='end'>
+					{isLogged ? (
+						<Button color='primary' onClick={logout}>
+							Logout
+						</Button>
+					) : (
+						<>
+							<NavbarItem className='hidden lg:flex'>
+								<Link href='/Login'>Login</Link>
+							</NavbarItem>
+							<NavbarItem>
+								<Button as={Link} color='primary' href='#' variant='flat'>
+									Sign Up
+								</Button>
+							</NavbarItem>
+						</>
+					)}
+				</NavbarContent>
+			</Navbar>
+		</>
 	);
 }
