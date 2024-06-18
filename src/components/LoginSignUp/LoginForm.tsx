@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input, Checkbox } from '@nextui-org/react';
+import { fetchLogin } from '../../services/fetchLogin';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface LoginFormProps {
 	onSwitch: () => void;
 }
 export function LoginForm({ onSwitch }: LoginFormProps) {
+	const { loggin } = useAuth();
+	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log('Login:', { email, password, rememberMe });
+		try {
+			const response = await fetchLogin({ email, password });
+			loggin(response.token);
+			navigate('/Welcome');
+		} catch {
+			console.error('Login failed');
+		}
 	};
 
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col gap-4'>
 			<Input type='email' label='Email' placeholder='Enter your email' fullWidth value={email} onChange={e => setEmail(e.target.value)} required />
+
 			<Input label='Password' placeholder='Enter your password' type='password' fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
+
 			<div className='flex items-center justify-between'>
 				<Checkbox isSelected={rememberMe} onChange={() => setRememberMe(!rememberMe)} color='default'>
 					Lembrar-se de mim

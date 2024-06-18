@@ -33,16 +33,9 @@ export function Header() {
 							Logout
 						</Button>
 					) : (
-						<>
-							<NavbarItem className='hidden lg:flex'>
-								<Link href='/Login'>Login</Link>
-							</NavbarItem>
-							<NavbarItem>
-								<Button as={Link} color='primary' href='#' variant='flat'>
-									Sign Up
-								</Button>
-							</NavbarItem>
-						</>
+						<NavbarItem className='hidden lg:flex'>
+							<Link href='/Login'>Login</Link>
+						</NavbarItem>
 					)}
 				</NavbarContent>
 			</Navbar>

@@ -18,6 +18,7 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 		nif: '',
 		email: '',
 		password: '',
+		validationCode: '',
 	});
 
 	const [passwordScore, setPasswordScore] = useState(0);
@@ -35,12 +36,12 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			console.log('Signup:', formData);
 			const response = await fetchSignUp({
 				fullName: formData.fullName,
 				nif: formData.nif,
 				email: formData.email,
 				password: formData.password,
+				validationCode: formData.validationCode,
 			});
 			loggin(response.token);
 			setFormData({
@@ -48,9 +49,9 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 				nif: '',
 				email: '',
 				password: '',
+				validationCode: '',
 			});
 			navigate('/Welcome');
-
 		} catch (error) {
 			console.error(error);
 		}
@@ -59,9 +60,15 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col gap-4'>
 			<Input type='text' name='fullName' label='Nome completo' placeholder='Nome Completo' fullWidth value={formData.fullName} onChange={handleChange} required />
+
 			<Input type='text' name='nif' label='Número de Contribuinte' placeholder='Número de Contribuinte' fullWidth value={formData.nif} onChange={handleChange} required />
+
+			<Input type='text' name='validationCode' label='Código de validação' placeholder='Código de validação' fullWidth value={formData.validationCode} onChange={handleChange} required />
+
 			<Input type='email' name='email' label='Email' placeholder='Enter your email' fullWidth value={formData.email} onChange={handleChange} required />
+
 			<Input label='Password' name='password' placeholder='Enter your password' type='password' fullWidth value={formData.password} onChange={handleChange} required />
+
 			<div className='text-white'>Força da senha: {['Muito Fraca', 'Fraca', 'Média', 'Forte', 'Muito Forte'][passwordScore]}</div>
 			<Button type='submit' className='bg-[#009342] text-white font-semibold py-2 rounded-2xl'>
 				Sign up

@@ -8,7 +8,7 @@ import { Welcome } from './pages/Welcome.tsx';
 import { Login } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
 
-export const router = createBrowserRouter([
+ export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/Welcome',
-				element: <AuthGuard />,
+				element: <AuthGuard isPrivate={true}/>,
 				children: [
 					{
 						index: true,
@@ -47,4 +47,4 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
-]);
+]); 
