@@ -25,6 +25,12 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
+		if (name === 'nif') {
+			const nif = value.replace(/\D/g, '');
+			setFormData({ ...formData, [name]: nif });
+			return 
+		}
+
 		setFormData({ ...formData, [name]: value });
 
 		if (name === 'password') {
@@ -74,9 +80,9 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 				Sign up
 			</Button>
 			<div className='text-center mt-4 text-white'>
-				Já tem uma conta?{' '}
-				<a href='#' className='text-blue-500 hover:underline' onClick={onSwitch}>
-					Sign in
+				Já está registado?{' '}
+				<a className='text-blue-500 hover:underline' onClick={onSwitch}>
+					Entrar
 				</a>
 			</div>
 		</form>

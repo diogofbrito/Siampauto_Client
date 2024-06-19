@@ -5,10 +5,11 @@ import { About } from './pages/About.tsx';
 import { Stock } from './pages/Stock.tsx';
 import { ErrorPage } from './pages/ErrorPage.tsx';
 import { Welcome } from './pages/Welcome.tsx';
-import { Login } from './pages/Login.tsx';
+import { AreaReservada } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
+import { Teste } from './pages/Teste.tsx';
 
- export const router = createBrowserRouter([
+export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
@@ -17,22 +18,39 @@ import { AuthGuard } from './components/AuthGuard.tsx';
 				index: true,
 				element: <Home />,
 			},
-
 			{
 				path: '/Sobre',
-				element: <About />,
+				element: <AuthGuard isPrivate={false} />,
+				children: [
+					{
+						index: true,
+						element: <About />,
+					},
+				],
 			},
 			{
 				path: '/Stock',
-				element: <Stock />,
+				element: <AuthGuard isPrivate={false} />,
+				children: [
+					{
+						index: true,
+						element: <Stock />,
+					},
+				],
 			},
 			{
-				path: '/Login',
-				element: <Login />,
+				path: '/Entrar',
+				element: <AuthGuard isPrivate={false} />,
+				children: [
+					{
+						index: true,
+						element: <AreaReservada />,
+					},
+				],
 			},
 			{
 				path: '/Welcome',
-				element: <AuthGuard isPrivate={true}/>,
+				element: <AuthGuard isPrivate={true} />,
 				children: [
 					{
 						index: true,
@@ -40,11 +58,21 @@ import { AuthGuard } from './components/AuthGuard.tsx';
 					},
 				],
 			},
-			
+			{
+				path: '/Teste',
+				element: <AuthGuard isPrivate={true} />,
+				children: [
+					{
+						index: true,
+						element: <Teste />,
+					},
+				],
+			},
+
 			{
 				path: '*',
 				element: <ErrorPage />,
 			},
 		],
 	},
-]); 
+]);

@@ -1,16 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { VehiclesProvider } from './contexts/VehiclesContext';
+import { NextUIProvider } from '@nextui-org/react';
 import { Header } from './components/Header/index';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
+	    const navigate = useNavigate();
+
 	return (
-		<AuthProvider>
-			<VehiclesProvider>
-				<Header />
-				<Outlet />
-			</VehiclesProvider>
-		</AuthProvider>
+		<NextUIProvider navigate={navigate}>
+			<AuthProvider>
+				<VehiclesProvider>
+					<Header />
+					<Outlet />
+				</VehiclesProvider>
+			</AuthProvider>
+		</NextUIProvider>
 	);
 }
 

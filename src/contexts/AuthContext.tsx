@@ -8,6 +8,7 @@ interface AuthContextProps {
 	loggin: (token: string) => void;
 	user: ProfileData['user'] | null;
 	car: Vehicle | null;
+	loading: boolean;
 }
 
 interface ProfileData {
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [isLogged, setIsLogged] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [user, setUser] = useState<ProfileData['user'] | null>(null);
 	const [car, setCar] = useState<Vehicle | null>(null);
 
@@ -41,6 +43,14 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 		localStorage.removeItem('token');
 		setCar(null);
 	}
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			api.defaults.headers.Authorization = `Bearer ${token}`;
+			setIsLogged(true);
+		}
+		setLoading(false)
+	}), [];
 
 	useEffect(() => {
 		async function loadStorageData() {
@@ -54,6 +64,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 			try {
 				const { data } = await api.get<ProfileData>('/profile', { headers: { Authorization: `Bearer ${token}` } });
 				setUser(data.user);
+				console.log(data.user);
 				setCar(data.car);
 				setIsLogged(true);
 
@@ -65,9 +76,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 		}
 
 		loadStorageData();
-	}, []);
+	}, [isLogged]);
 
-	return <AuthContext.Provider value={{ car, user, isLogged, loggin, logout }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ loading, car, user, isLogged, loggin, logout }}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = (): AuthContextProps => {

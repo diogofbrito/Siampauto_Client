@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useVehicles } from '../contexts/VehiclesContext';
 import { VehicleCard } from '../components/VehicleCard';
-import { ShowMoreButton } from '../components/ShowMoreButton';
+import { ShowMoreBtn } from '../components/ShowMoreBtn';
 import { CarSearchFilter } from '../components/CarSearchFilter';
 
 export function Stock() {
@@ -29,7 +29,8 @@ export function Stock() {
 					<VehicleCard key={vehicle.ID} vehicle={vehicle} />
 				))}
 			</div>
-			{visibleVehicles < vehicles.length && <ShowMoreButton onClick={handleShowMore} />}
+			
+			{visibleVehicles < vehicles.length && <ShowMoreBtn onClick={handleShowMore} />}
 		</div>
 	);
 }

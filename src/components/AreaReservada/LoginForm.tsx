@@ -27,9 +27,9 @@ export function LoginForm({ onSwitch }: LoginFormProps) {
 
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-			<Input type='email' label='Email' placeholder='Enter your email' fullWidth value={email} onChange={e => setEmail(e.target.value)} required />
+			<Input type='email' label='Email' placeholder='Insira o seu email' fullWidth value={email} onChange={e => setEmail(e.target.value)} required />
 
-			<Input label='Password' placeholder='Enter your password' type='password' fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
+			<Input label='Password' placeholder='Insira a sua password' type='password' fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
 
 			<div className='flex items-center justify-between'>
 				<Checkbox isSelected={rememberMe} onChange={() => setRememberMe(!rememberMe)} color='default'>
@@ -39,12 +39,12 @@ export function LoginForm({ onSwitch }: LoginFormProps) {
 					Esqueceu-se da password?
 				</a>
 			</div>
-			<button type='submit' className='text-center w-full bg-[#009342] text-white font-semibold py-2 rounded-2xl focus:outline-none focus:ring focus:border-blue-700 hover:bg-blue-700'>
-				Sign in
+			<button type='submit' className='text-center w-full bg-primary-500 text-white font-semibold py-2 rounded-2xl focus:outline-none focus:ring hover:bg-blue-700'>
+				Entrar
 			</button>
 			<div className='text-center mt-4 text-white'>
 				Ainda não é membro?{' '}
-				<a href='#' className='text-[#009342] hover:underline font-semibold' onClick={onSwitch}>
+				<a className='text-[#009342] hover:underline font-semibold' onClick={onSwitch}>
 					Criar conta agora
 				</a>
 			</div>
@@ -52,4 +52,3 @@ export function LoginForm({ onSwitch }: LoginFormProps) {
 	);
 }
 
-// FAZER LOGIN

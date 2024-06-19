@@ -2,14 +2,17 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 export function AuthGuard({ isPrivate = false }: { isPrivate?: boolean }) {
-	const { isLogged } = useAuth();
+	const { isLogged, loading } = useAuth();
 	console.log(isLogged);
 
+	if (loading) {
+		return <>A carregar...</>;
+
+	}
+
 	if (!isLogged && isPrivate) {
-		return <Navigate replace to='/Login' />;
+		return <Navigate replace to='/Entrar' />;
 	}
-	if (isLogged && !isPrivate) {
-		return <Navigate replace to='/Welcome' />;
-	}
+
 	return <Outlet />;
 }

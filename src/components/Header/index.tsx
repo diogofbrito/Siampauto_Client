@@ -30,11 +30,11 @@ export function Header() {
 				<NavbarContent justify='end'>
 					{isLogged ? (
 						<Button color='primary' onClick={logout}>
-							Logout
+							Sair
 						</Button>
 					) : (
 						<NavbarItem className='hidden lg:flex'>
-							<Link href='/Login'>Login</Link>
+							<Link href='/Entrar'>Área Reservada</Link>
 						</NavbarItem>
 					)}
 				</NavbarContent>
