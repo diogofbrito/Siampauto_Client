@@ -8,7 +8,7 @@ import { Welcome } from './pages/Welcome.tsx';
 import { AreaReservada } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
 import { Teste } from './pages/Teste.tsx';
-import { CarPage } from './pages/CarPage.tsx';
+import { VehiclePage } from './pages/VehiclePage.tsx';
 
 export const router = createBrowserRouter([
 	{
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
 				children: [
 					{
 						index: true,
-						element: <CarPage />,
+						element: <VehiclePage />,
 					},
 				],
 			},

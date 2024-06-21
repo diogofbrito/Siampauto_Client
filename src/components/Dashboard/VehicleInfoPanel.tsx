@@ -14,7 +14,7 @@ export function CarInfoPanel({ car }: { car: Vehicle }) {
 				</h3>
 				<div className='px-8 grid grid-cols-2 text-gray-600 gap-3 '>
 					<div className='flex flex-col'>
-						<p className='text-gray-700'>Ano</p>
+						<p className='text-gray-700'>Registo</p>
 						<div className='flex gap-2 text-lg'>
 							<Calendar />
 							{car?.Month} / {car?.Year}

@@ -12,8 +12,7 @@ function App() {
 			<AuthProvider>
 				<VehiclesProvider>
 					<Header />
-
-					<Outlet />
+						<Outlet />
 				</VehiclesProvider>
 			</AuthProvider>
 		</NextUIProvider>

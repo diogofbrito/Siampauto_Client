@@ -1,7 +1,7 @@
 import { useAuth } from '../contexts/AuthContext';
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
 import { InspectionSimulator } from '../components/IPO/InspectionSimulator';
-import { CarInfoPanel } from '../components/Dashboard/CarInfoPanel';
+import { CarInfoPanel } from '../components/Dashboard/VehicleInfoPanel';
 import { LiveClock } from '../components/Dashboard/LiveClock';
 
 export function Welcome() {
