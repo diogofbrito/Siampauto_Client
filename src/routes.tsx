@@ -8,6 +8,7 @@ import { Welcome } from './pages/Welcome.tsx';
 import { AreaReservada } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
 import { Teste } from './pages/Teste.tsx';
+import { CarPage } from './pages/CarPage.tsx';
 
 export const router = createBrowserRouter([
 	{
@@ -35,6 +36,16 @@ export const router = createBrowserRouter([
 					{
 						index: true,
 						element: <Stock />,
+					},
+				],
+			},
+			{
+				path: '/Stock/:id',
+				element: <AuthGuard isPrivate={false} />,
+				children: [
+					{
+						index: true,
+						element: <CarPage />,
 					},
 				],
 			},

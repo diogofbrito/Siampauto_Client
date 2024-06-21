@@ -6,6 +6,7 @@ interface VehiclesContextProps {
 	vehicles: Vehicle[];
 	loading: boolean;
 	error: string | null;
+	formatEquipmentList: (equipmentList: string[]) => string;
 }
 
 const VehiclesContext = createContext<VehiclesContextProps | undefined>(undefined);
@@ -30,7 +31,11 @@ const VehiclesProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 		getVehicles();
 	}, []);
 
-	return <VehiclesContext.Provider value={{ vehicles, loading, error }}>{children}</VehiclesContext.Provider>;
+	const formatEquipmentList = (equipmentList: string[]): string => {
+		return `<ul>${equipmentList.map(item => `<li>${item}</li>`).join('')}</ul>`;
+	};
+
+	return <VehiclesContext.Provider value={{ vehicles, loading, error, formatEquipmentList }}>{children}</VehiclesContext.Provider>;
 };
 
 const useVehicles = (): VehiclesContextProps => {

@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchSignUp } from '../../services/fetchSignUp';
 import { useAuth } from '../../contexts/AuthContext';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'; 
+
 import { Input, Button } from '@nextui-org/react';
+
 import zxcvbn from 'zxcvbn';
 
 interface SignupFormProps {
@@ -28,7 +31,7 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 		if (name === 'nif') {
 			const nif = value.replace(/\D/g, '');
 			setFormData({ ...formData, [name]: nif });
-			return 
+			return;
 		}
 
 		setFormData({ ...formData, [name]: value });
@@ -41,9 +44,12 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		const formattedFullName = capitalizeFirstLetter(formData.fullName);
+
 		try {
 			const response = await fetchSignUp({
-				fullName: formData.fullName,
+				fullName: formattedFullName,
 				nif: formData.nif,
 				email: formData.email,
 				password: formData.password,

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+
 export function InspectionSimulator() {
 	const [registrationDate, setRegistrationDate] = useState('');
 	const [nextInspectionDate, setNextInspectionDate] = useState<Date | null>(null);
@@ -20,7 +21,7 @@ export function InspectionSimulator() {
 	};
 
 	return (
-		<div className='container mx-auto p-4'>
+		<div className='p-4 bg-slate-300 rounded-xl'>
 			<h1 className='text-2xl font-bold mb-4'>Simulador de Próxima Inspeção</h1>
 
 			<div className='mb-4'>

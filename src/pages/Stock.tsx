@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useVehicles } from '../contexts/VehiclesContext';
 import { VehicleCard } from '../components/VehicleCard';
 import { ShowMoreBtn } from '../components/ShowMoreBtn';
@@ -26,10 +27,12 @@ export function Stock() {
 
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
 				{vehicles.slice(0, visibleVehicles).map(vehicle => (
-					<VehicleCard key={vehicle.ID} vehicle={vehicle} />
+					<Link key={vehicle.ID} to={`/Stock/${vehicle.ID}`}>
+						<VehicleCard key={vehicle.ID} vehicle={vehicle} />
+					</Link>
 				))}
 			</div>
-			
+
 			{visibleVehicles < vehicles.length && <ShowMoreBtn onClick={handleShowMore} />}
 		</div>
 	);

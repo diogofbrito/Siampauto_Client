@@ -1,6 +1,6 @@
 import { useAuth } from '../../contexts/AuthContext';
-import './style.css';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from '@nextui-org/react';
+import { DashboardBar } from './DashboardBar';
 
 export function Header() {
 	const { isLogged, logout } = useAuth();
@@ -8,7 +8,9 @@ export function Header() {
 		<>
 			<Navbar shouldHideOnScroll>
 				<NavbarBrand>
-					<p className='font-bold text-inherit'>ACME</p>
+					<Link color='foreground' href='/'>
+						<img src='../../assets/logoSiampauto.png' alt='Logo' />
+					</Link>
 				</NavbarBrand>
 				<NavbarContent className='hidden sm:flex gap-6' justify='center'>
 					<NavbarItem>
@@ -26,6 +28,7 @@ export function Header() {
 							Contactos
 						</Link>
 					</NavbarItem>
+					{isLogged && <DashboardBar />}
 				</NavbarContent>
 				<NavbarContent justify='end'>
 					{isLogged ? (
