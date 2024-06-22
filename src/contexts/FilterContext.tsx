@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { Vehicle } from '../types/vehicle';
 import { getFilteredVehicles } from '../utils/vehicleUtils';
 
@@ -6,7 +6,6 @@ interface FilterContextProps {
 	filters: {
 		brand?: string;
 		model?: string;
-		fuel?: string;
 	};
 	setFilters: (filters: FilterContextProps['filters']) => void;
 	filteredVehicles: Vehicle[];
@@ -18,10 +17,9 @@ export function FilterProvider({ children, vehicles }: { children: ReactNode; ve
 	const [filters, setFilters] = useState<{
 		brand?: string;
 		model?: string;
-		fuel?: string;
 	}>({});
 
-	const filteredVehicles = getFilteredVehicles(vehicles, filters.brand, filters.model, filters.fuel);
+	const filteredVehicles = getFilteredVehicles(vehicles, filters.brand, filters.model);
 
 	return <FilterContext.Provider value={{ filters, setFilters, filteredVehicles }}>{children}</FilterContext.Provider>;
 }

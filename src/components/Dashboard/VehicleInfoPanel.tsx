@@ -1,5 +1,4 @@
 import { Vehicle } from '../../types/vehicle'
-
 import { Calendar, Gauge, Fuel, Car, PaintBucket, CarFront } from 'lucide-react';
 
 export function CarInfoPanel({ car }: { car: Vehicle }) {

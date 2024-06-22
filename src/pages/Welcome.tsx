@@ -8,8 +8,8 @@ export function Welcome() {
 	const { user, car } = useAuth();
 	const formattedName = user ? capitalizeFirstLetter(user.fullName) : '';
 
-	const date = new Intl.DateTimeFormat('pt-BR').format(new Date(user?.createdAt || new Date()));
-
+/* 	const date = new Intl.DateTimeFormat('pt-BR').format(new Date(user?.createdAt || new Date()));
+ */
 	return (
 		<div className='flex flex-col text-white p-24 gap-4'>
 			<div className='font-bold text-3xl flex justify-between'>
@@ -17,7 +17,7 @@ export function Welcome() {
 				<LiveClock />
 			</div>
 			<div className='grid grid-cols-3 gap-6 '>
-				<CarInfoPanel car={car} />
+				{car && <CarInfoPanel car={car} />}
 				<InspectionSimulator />
 
 				<div className='rounded-xl'>olaaa</div>
