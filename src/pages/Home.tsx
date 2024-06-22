@@ -4,7 +4,7 @@ import { WhereAreWe } from '../components/WhereAreWe/WhereAreWe';
 export function Home() {
 	return (
 		<div>
-			<Hero imageUrl='../../../public/imgs/BgHero_Mercedes.jpg' />
+			<Hero imageUrl='../assets/imgs/BgHero_Mercedes.jpg' />
 			<div className='global-container'>
 				<WhereAreWe />
 			</div>
