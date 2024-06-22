@@ -1,4 +1,3 @@
-
 interface HeroProps {
 	imageUrl: string;
 }
