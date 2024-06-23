@@ -29,11 +29,7 @@ export function DashboardBar() {
 							Dados do utilizador
 						</Link>
 					</DropdownItem>
-					<DropdownItem key='notas' description='Dados de viaturas, inspeções, serviços e mais.'>
-						<Link color='foreground' href='/'>
-							Dados do veículo
-						</Link>
-					</DropdownItem>
+					
 				</DropdownMenu>
 			</Dropdown>
 		</NavbarItem>

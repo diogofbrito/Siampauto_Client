@@ -8,7 +8,9 @@ export function CarInfoPanel({ vehicle }: { vehicle: Vehicle }) {
 			<div className=' text-gray-500'>Viatura adquirida:</div>
 			<div className='pb-4'>
 				<div className='text-2xl font-bold'>{vehicle.Brand}</div>
-				<div className='text-lg -mt-1'>{vehicle.Model}</div>
+				<div className='text-lg -mt-1'>
+					{vehicle.Model} {vehicle.Version}
+				</div>
 			</div>
 			<img src={vehicle?.PhotoList[0].Photo} alt={vehicle?.Model} className='w-full h-55 object-cover rounded-2xl' />
 			<div className='mt-4 color grid grid-cols-2 gap-4'>

@@ -25,8 +25,10 @@ export function VehiclePage() {
 				<div>
 					<div className=' text-white flex justify-between mb-6'>
 						<div>
-							<div className='text-2xl font-bold md:text-4xl'>{vehicle.Brand}</div>
-							<div className='text-xl md:text-2xl -mt-1'>{vehicle.Model}</div>
+							<div className='text-2xl font-bold md:text-4xl'>
+								{vehicle.Brand}</div>
+							<div className='text-xl md:text-2xl -mt-1'>
+								{vehicle.Model} {vehicle.Version}</div>
 						</div>
 						<p className='text-3xl md:text-4xl   font-bold text-green-link'>{vehicle.Price} €</p>
 					</div>

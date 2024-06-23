@@ -6,6 +6,7 @@ import { CarInfoPanel } from '../components/Dashboard/VehicleInfoPanel';
 import { LiveClock } from '../components/Dashboard/LiveClock';
 import { News } from '../components/News';
 import { NotesComponent } from '../components/UserNotes/NotesComponent';
+import { UserInfoPanel } from '../components/Dashboard/UserInfoPanel';
 
 export function Welcome() {
 	const { user, vehicle } = useAuth();
@@ -41,6 +42,7 @@ export function Welcome() {
 				{vehicle && <CarInfoPanel vehicle={vehicle} />}
 				<div className=' flex flex-col gap-6'>
 					<InspectionSimulator />
+					{user && <UserInfoPanel user={user}/>}
 				</div>
 				<News />
 			</div>

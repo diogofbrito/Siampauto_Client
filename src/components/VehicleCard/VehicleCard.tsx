@@ -14,7 +14,8 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
 			<div className='mt-4 text-white flex justify-between'>
 				<div>
 					<div className='text-xl font-bold'>{vehicle.Brand}</div>
-					<div className='text-lg -mt-1'>{vehicle.Model}</div>
+					<div className='text-lg -mt-1'>{vehicle.Model} </div>
+					<div className='text-lg -mt-1'>{vehicle.Version}</div>
 				</div>
 				<p className='text-2xl font-bold text-green-link'>{vehicle.Price} €</p>
 			</div>
@@ -58,7 +59,6 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
 						</div>
 					</div>
 				</Card>
-
 			</div>
 		</div>
 	);
