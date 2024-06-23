@@ -11,11 +11,6 @@ export async function fetchCreateNote(noteData: NoteData): Promise<Note> {
     return response.data;
 }
 
-export async function fetchUpdateNote(id: number, noteData: NoteData): Promise<Note> {
-    const response = await api.put<Note>(`/notes/${id}`, noteData);
-    return response.data;
-}
-
 export async function fetchDeleteNote(id: number): Promise<void> {
     await api.delete(`/notes/${id}`);
 }

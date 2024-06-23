@@ -8,6 +8,7 @@ import { NewsInfoPanel } from '../components/Dashboard/NewsInfoPanel';
 import { NotesComponent } from '../components/UserNotes/NotesComponent';
 import { UserInfoPanel } from '../components/Dashboard/UserInfoPanel';
 import { WeatherInfoPanel } from '../components/Dashboard/WeatherInfoPanel';
+import { WhereAreWe } from '../components/WhereAreWe/WhereAreWe';
 
 export function Welcome() {
 	const { user, vehicle } = useAuth();
@@ -29,26 +30,29 @@ export function Welcome() {
 	}, [user]);
 
 	return (
-		<div className='flex flex-col text-white p-24 gap-6'>
-			<div className='font-bold text-3xl md:flex md:justify-between block'>
-				<div>
-					Bem vindo <span className='text-green-link'>{formattedName}</span>
+		<div className='global-container'>
+			<div className='flex flex-col text-white gap-6'>
+				<div className='font-bold text-3xl md:flex md:justify-between block'>
+					<div>
+						Bem vindo <span className='text-green-link'>{formattedName}</span>
+					</div>
+					<LiveClockInfoPanel />
 				</div>
-				<LiveClockInfoPanel />
-			</div>
 
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
-				{vehicle && <CarInfoPanel vehicle={vehicle} />}
-				<div className=' flex flex-col gap-6'>
-					<InspectionSimulatorInfoPanel />
-					{user && <UserInfoPanel user={user} />}
-					<WeatherInfoPanel />
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
+					{vehicle && <CarInfoPanel vehicle={vehicle} />}
+					<div className=' flex flex-col gap-6'>
+						<InspectionSimulatorInfoPanel />
+						{user && <UserInfoPanel user={user} />}
+						<WeatherInfoPanel />
+					</div>
+					<NewsInfoPanel />
 				</div>
-				<NewsInfoPanel />
+				<div className='bg-grey-default rounded-3xl p-6 '>
+					<NotesComponent />
+				</div>
 			</div>
-			<div className='bg-grey-default rounded-3xl p-6 '>
-				<NotesComponent />
-			</div>
+			<WhereAreWe />
 		</div>
 	);
 }

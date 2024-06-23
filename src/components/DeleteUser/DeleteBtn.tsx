@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchDelete } from '../../services/fetchDelete';
 
+
 interface DeleteBtnProps {
 	logout: () => void;
+
 }
 
-const DeleteBtn: React.FC<DeleteBtnProps> = ({ logout }) => {
+export function DeleteBtn({ logout }: DeleteBtnProps ) {
 	const [showModal, setShowModal] = useState(false);
 	const navegate = useNavigate();
 
@@ -45,4 +47,3 @@ const DeleteBtn: React.FC<DeleteBtnProps> = ({ logout }) => {
 	);
 };
 
-export default DeleteBtn;

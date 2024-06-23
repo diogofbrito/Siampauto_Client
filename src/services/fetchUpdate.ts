@@ -1,10 +1,10 @@
 import { api } from './api';
 
-interface UpdateData {
-	dateBirth: Date;
-	address: string;
-	city: string;
-	phoneNumber: string;
+export interface UpdateData {
+	dateBirth?: Date;
+	address?: string;
+	city?: string;
+	phoneNumber?: string;
 }
 
 interface User {

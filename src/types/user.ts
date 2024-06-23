@@ -6,7 +6,7 @@ export interface UserData {
 		nif: string;
 		email: string;
 		password: string;
-		vehicles: string[];
+		cars: string[];
 		validationCode: string;
 		createdAt: Date;
 		dateBirth?: Date | null;
@@ -14,6 +14,6 @@ export interface UserData {
 		city?: string | null;
 		phoneNumber?: string | null;
 	};
-	car: Vehicle | null; 
+	car: Vehicle | null;
 }
  

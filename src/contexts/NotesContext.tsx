@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Note, NoteData } from '../types/note';
-import { fetchNotes, fetchCreateNote, fetchUpdateNote, fetchDeleteNote } from '../services/fetchNotes';
+import { fetchNotes, fetchCreateNote, fetchDeleteNote } from '../services/fetchNotes';
 import { useAuth } from '../contexts/AuthContext';
+import { toast } from 'sonner';
+
 
 interface NotesContextProps {
 	notes: Note[];
 	loading: boolean;
 	error: string | null;
 	createNote: (noteData: NoteData) => Promise<void>;
-	updateNote: (id: number, noteData: NoteData) => Promise<void>;
 	deleteNote: (id: number) => Promise<void>;
+
 }
 
 const NotesContext = createContext<NotesContextProps | undefined>(undefined);
@@ -53,32 +55,26 @@ const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 			await fetchCreateNote(noteData);
 			const updatedNotes = await fetchNotes();
 			setNotes(updatedNotes);
+
 		} catch (err) {
 			setError('Erro ao criar nota.');
 		}
 	};
 
-	const updateNote = async (id: number, noteData: NoteData): Promise<void> => {
-		try {
-			await fetchUpdateNote(id, noteData);
-			const updatedNotes = await fetchNotes();
-			setNotes(updatedNotes);
-		} catch (err) {
-			setError('Erro ao atualizar nota.');
-		}
-	};
 
 	const deleteNote = async (id: number): Promise<void> => {
 		try {
 			await fetchDeleteNote(id);
 			const updatedNotes = notes.filter(note => note.id !== id);
 			setNotes(updatedNotes);
+			toast.success('Nota deletada com sucesso!');
+
 		} catch (err) {
 			setError('Erro ao deletar nota.');
 		}
 	};
 
-	return <NotesContext.Provider value={{ notes, loading, error, createNote, updateNote, deleteNote }}>{children}</NotesContext.Provider>;
+	return <NotesContext.Provider value={{ notes, loading, error, createNote, deleteNote }}>{children}</NotesContext.Provider>;
 };
 
 const useNotes = (): NotesContextProps => {

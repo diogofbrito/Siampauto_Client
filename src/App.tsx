@@ -4,6 +4,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { Header } from './components/Header/Header';
 import { AuthProvider } from './contexts/AuthContext';
 import { NotesProvider } from './contexts/NotesContext';
+import { Toaster } from 'sonner';
 
 function App() {
 	const navigate = useNavigate();
@@ -13,6 +14,7 @@ function App() {
 			<AuthProvider>
 				<VehiclesProvider>
 					<NotesProvider>
+						<Toaster richColors />
 						<Header />
 						<Outlet />
 					</NotesProvider>

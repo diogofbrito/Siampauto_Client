@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNotes } from '../../contexts/NotesContext';
 import { NoteData } from '../../types/note';
+import { toast } from 'sonner';
+
 
 export function FormNotes() {
 	const { createNote } = useNotes();
@@ -21,7 +23,9 @@ export function FormNotes() {
 			setTitle('');
 			setDate(new Date().toISOString().slice(0, 10));
 			setContent('');
+			toast.success('Nota criada com sucesso!');
 		} catch (err) {
+			toast.error('Erro ao criar nota.');
 			console.error('Erro ao criar nota:', err);
 		}
 	};

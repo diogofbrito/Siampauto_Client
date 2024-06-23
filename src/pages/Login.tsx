@@ -14,6 +14,7 @@ export function AreaReservada() {
 	useEffect(() => {
 		if (isLogged) {
 			navegate('/Welcome');
+
 		}
 	}, [isLogged, navegate]);
 

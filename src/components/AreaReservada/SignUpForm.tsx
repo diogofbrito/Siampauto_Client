@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { fetchSignUp } from '../../services/fetchSignUp';
 import { useAuth } from '../../contexts/AuthContext';
 import { Input, Button } from '@nextui-org/react';
+import { toast } from 'sonner';
+
 
 import zxcvbn from 'zxcvbn';
 
@@ -60,6 +62,7 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 				password: '',
 				validationCode: '',
 			});
+			toast.success('Conta criada com sucesso!');
 			navigate('/Welcome');
 		} catch (error) {
 			console.error(error);
