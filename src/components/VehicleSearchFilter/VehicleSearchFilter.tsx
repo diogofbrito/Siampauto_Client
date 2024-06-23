@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useVehicles } from '../../contexts/VehiclesContext';
 import { Vehicle } from '../../types/vehicle';
 import { Select, SelectItem } from '@nextui-org/select';
-import { Button } from '@nextui-org/react';
 
 interface CarSearchFilterProps {
 	onSearch: (filteredVehicles: Vehicle[]) => void;
@@ -10,7 +9,6 @@ interface CarSearchFilterProps {
 
 export function CarSearchFilter({ onSearch }: CarSearchFilterProps) {
 	const { vehicles } = useVehicles();
-
 	const [brand, setBrand] = useState<string>('');
 	const [model, setModel] = useState<string>('');
 	const [availableModels, setAvailableModels] = useState<string[]>([]);
@@ -25,24 +23,35 @@ export function CarSearchFilter({ onSearch }: CarSearchFilterProps) {
 		}
 	}, [brand, vehicles]);
 
-	const handleSearch = () => {
+	useEffect(() => {
 		const filteredVehicles = vehicles.filter(vehicle => {
-			const matchesBrand = brand ? vehicle.Brand === brand : true;
-			const matchesModel = model ? vehicle.Model === model : true;
-
+			const matchesBrand = !brand || brand === 'Ver Todos' ? true : vehicle.Brand === brand;
+			const matchesModel = !model || vehicle.Model === model;
 			return matchesBrand && matchesModel;
 		});
 
-		onSearch(filteredVehicles);
-	};
+		onSearch(filteredVehicles.length > 0 ? filteredVehicles : vehicles);
+	}, [brand, model, vehicles, onSearch]);
 
-	const uniqueBrands = [...new Set(vehicles.map(vehicle => vehicle.Brand))];
-	console.log(availableModels);
-	const totalVehicles = vehicles.filter(vehicle => (vehicle.Model === model)).filter(vehicle => (vehicle.Brand === brand));
-	
+
+	const uniqueBrandsSet = new Set(vehicles.map(vehicle => vehicle.Brand));
+	const uniqueBrands = ['Ver Todos', ...uniqueBrandsSet];
+
 	return (
-		<div className='p-4 flex gap-4'>
-			<Select value={brand} label='Selecione uma marca' onChange={e => setBrand(e.target.value)} placeholder='Selecione uma marca' className='max-w-xs'>
+		<div className='p-4 flex gap-4 items-center justify-center'>
+			<Select
+				value={brand}
+				label='Selecione uma marca'
+				onChange={e => {
+					const selectedBrand = e.target.value;
+					setBrand(selectedBrand === 'Ver Todos' ? '' : selectedBrand);
+					if (selectedBrand === 'Ver Todos') {
+						setModel('');
+					}
+				}}
+				placeholder='Selecione uma marca'
+				className='max-w-xs'
+			>
 				{uniqueBrands.map(brand => (
 					<SelectItem key={brand} value={brand} textValue={brand}>
 						{brand}
@@ -57,10 +66,6 @@ export function CarSearchFilter({ onSearch }: CarSearchFilterProps) {
 					</SelectItem>
 				))}
 			</Select>
-
-			<Button onClick={handleSearch} className='lg'>
-				Ver {totalVehicles.length === 0 ? vehicles.length : totalVehicles.length} veículos
-			</Button>
 		</div>
 	);
 }

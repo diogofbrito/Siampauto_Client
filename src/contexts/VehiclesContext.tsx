@@ -41,7 +41,7 @@ const VehiclesProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 const useVehicles = (): VehiclesContextProps => {
 	const context = useContext(VehiclesContext);
 	if (!context) {
-		throw new Error('useVehicles deve ser usado dentro de um VehiclesProvider');
+		throw new Error();
 	}
 	return context;
 };

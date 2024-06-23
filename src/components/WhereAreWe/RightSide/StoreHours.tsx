@@ -1,4 +1,4 @@
-import useStoreHours from '../../../hooks/useStoreHours';
+import { useStoreHours } from '../../../hooks/useStoreHours';
 import { TriangleAlert, Store, DoorClosed } from 'lucide-react';
 
 export function StoreHours() {
@@ -37,7 +37,7 @@ export function StoreHours() {
 			<div className='flex gap-1' style={{ color: getStatusColor() }}>
 				{getStatusIcon()} {status}
 			</div>
-			<div>
+			<div className='pt-1'>
 				Segunda a Sexta: 10h - 13h, 14:30h - 18h<br></br>
 				Fins de semana e feriados: Fechado
 			</div>

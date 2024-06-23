@@ -1,6 +1,6 @@
 import { Vehicle } from '../../types/vehicle';
-import { Calendar, Gauge, Fuel, Car, PaintBucket, CarFront } from 'lucide-react';
-import { Card, CardBody } from '@nextui-org/react';
+import { Calendar, Gauge, Fuel, Car, PaintBucket, CarFront, CircleGauge, Award, Leaf } from 'lucide-react';
+import { Card } from '@nextui-org/react';
 
 interface CarSpecificsProps {
 	vehicle: Vehicle;
@@ -9,104 +9,126 @@ interface CarSpecificsProps {
 export function PageSpecifics({ vehicle }: CarSpecificsProps) {
 	return (
 		<div className=' text-gray-600 gap-8 '>
-			<div className='grid grid-cols-4 gap-4'>
-				<Card>
-					<CardBody>
-						<p className='text-gray-700'>Registo</p>
-						<div className='flex gap-2 text-lg'>
-							<Calendar />
-							{vehicle.Month} / {vehicle.Year}
+			<div className='grid  grid-cols-2 md:grid-cols-4 gap-4'>
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Calendar />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Registo</div>
+							<div className='text-white text-md md:text-lg'>
+								{vehicle.Month} / {vehicle.Year}
+							</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Quilómetros</p>
-						<div className='flex gap-2 text-lg'>
-							<Gauge />
-							{vehicle.Kms} Km
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Gauge />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Quilómetros</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Kms} Kms</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700'>Segmento</p>
-						<div className='flex gap-2 text-lg'>
-							<Car />
-							{vehicle.Category}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Fuel />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Combustível</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Fuel}</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Lugares</p>
-						<div className='flex gap-2 text-lg'>
-							<Car />
-							{vehicle.Seats}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<CarFront />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Segmento</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Category}</div>
 						</div>
-					</CardBody>
-				</Card>
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Portas</p>
-						<div className='flex gap-2 text-lg'>
-							<Car />
-							{vehicle.Doors}
-						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Combustível</p>
-						<div className='flex gap-2 text-lg'>
-							<Fuel />
-							{vehicle.Fuel}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Car />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Lugares</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Seats}</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Cilindrada</p>
-						<div className='flex gap-2 text-lg'>
-							<Fuel />
-							{vehicle.CC}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Car />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Portas</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Doors}</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Potência</p>
-						<div className='flex gap-2 text-lg'>
-							<Fuel />
-							{vehicle.HP} cv
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Car />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Cilindrada</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.CC} cc</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Cor</p>
-						<div className='flex gap-2 text-lg'>
-							<PaintBucket />
-							{vehicle.Color}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<CircleGauge />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Potência</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.HP} cv</div>
 						</div>
-					</CardBody>
+					</div>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<p className='text-gray-700 '>Transmissão</p>
-						<div className='flex gap-2 text-lg'>
-							<CarFront />
-							{vehicle.Transmission}
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<PaintBucket />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Cor</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Color}</div>
 						</div>
-					</CardBody>
+					</div>
+				</Card>
+
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<CarFront />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Transmissão</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.Transmission}</div>
+						</div>
+					</div>
+				</Card>
+
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Award />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>Garantia</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.WarrantyMonths} meses *</div>
+						</div>
+					</div>
+				</Card>
+				<Card radius='md' className='bg-grey-boxCard px-3 py-2 text-white'>
+					<div className='flex gap-2 items-center'>
+						<Leaf />
+						<div className='flex flex-col'>
+							<div className='text-grey-title text-xs md:text-sm'>CO2</div>
+							<div className='text-white text-md md:text-lg'>{vehicle.co2} g/km</div>
+						</div>
+					</div>
 				</Card>
 			</div>
 		</div>

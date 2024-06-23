@@ -60,4 +60,3 @@ export function useStoreHours ()  {
 	return status;
 };
 
-export default useStoreHours;

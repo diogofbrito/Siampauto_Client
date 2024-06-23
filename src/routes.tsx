@@ -7,8 +7,8 @@ import { ErrorPage } from './pages/ErrorPage.tsx';
 import { Welcome } from './pages/Welcome.tsx';
 import { AreaReservada } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
-import { Teste } from './pages/Teste.tsx';
 import { VehiclePage } from './pages/VehiclePage.tsx';
+import { ProfileUser } from './pages/ProfileUser.tsx';
 
 export const router = createBrowserRouter([
 	{
@@ -70,12 +70,12 @@ export const router = createBrowserRouter([
 				],
 			},
 			{
-				path: '/Teste',
+				path: '/Perfil',
 				element: <AuthGuard isPrivate={true} />,
 				children: [
 					{
 						index: true,
-						element: <Teste />,
+						element: <ProfileUser />,
 					},
 				],
 			},

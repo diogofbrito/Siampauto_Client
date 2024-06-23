@@ -6,7 +6,7 @@ interface ShowMoreButtonProps {
 
 export const ShowMoreBtn: React.FC<ShowMoreButtonProps> = ({ onClick }) => (
 	<div className='flex justify-center'>
-		<button className={'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'} onClick={onClick}>
+		<button className='bg-green-link hover:bg-grey-title text-white font-bold py-2 px-5 rounded-full text-center' onClick={onClick}>
 			Mostrar Mais
 		</button>
 	</div>

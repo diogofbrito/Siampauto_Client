@@ -7,7 +7,7 @@ interface AuthContextProps {
 	logout: () => void;
 	loggin: (token: string) => void;
 	user: ProfileData['user'] | null;
-	car: Vehicle | null;
+	vehicle: Vehicle | null;
 	loading: boolean;
 }
 
@@ -31,7 +31,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 	const [isLogged, setIsLogged] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [user, setUser] = useState<ProfileData['user'] | null>(null);
-	const [car, setCar] = useState<Vehicle | null>(null);
+	const [vehicle, setVehicle] = useState<Vehicle | null>(null);
 
 	function loggin(token: string) {
 		setIsLogged(true);
@@ -41,7 +41,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 	function logout() {
 		setIsLogged(false);
 		localStorage.removeItem('token');
-		setCar(null);
+		setVehicle(null);
 	}
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -49,8 +49,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 			api.defaults.headers.Authorization = `Bearer ${token}`;
 			setIsLogged(true);
 		}
-		setLoading(false)
-	}), [];
+		setLoading(false);
+	}),
+		[];
 
 	useEffect(() => {
 		async function loadStorageData() {
@@ -65,7 +66,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 				const { data } = await api.get<ProfileData>('/profile', { headers: { Authorization: `Bearer ${token}` } });
 				setUser(data.user);
 				console.log(data.user);
-				setCar(data.car);
+				setVehicle(data.car);
 				setIsLogged(true);
 
 				console.log(data.car);
@@ -78,7 +79,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 		loadStorageData();
 	}, [isLogged]);
 
-	return <AuthContext.Provider value={{ loading, car, user, isLogged, loggin, logout }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ loading, vehicle, user, isLogged, loggin, logout }}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = (): AuthContextProps => {

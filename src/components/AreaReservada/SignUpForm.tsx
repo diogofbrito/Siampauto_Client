@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchSignUp } from '../../services/fetchSignUp';
 import { useAuth } from '../../contexts/AuthContext';
-import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'; 
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 import { Input, Button } from '@nextui-org/react';
 
@@ -71,7 +71,7 @@ export function SignupForm({ onSwitch }: SignupFormProps) {
 
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-			<Input type='text' name='fullName' label='Nome completo' placeholder='Nome Completo' fullWidth value={formData.fullName} onChange={handleChange} required />
+			<Input type='text' name='Name' label='Nome' placeholder='Nome' fullWidth value={formData.fullName} onChange={handleChange} required />
 
 			<Input type='text' name='nif' label='Número de Contribuinte' placeholder='Número de Contribuinte' fullWidth value={formData.nif} onChange={handleChange} required />
 

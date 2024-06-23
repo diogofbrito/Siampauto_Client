@@ -5,7 +5,7 @@ export function RightSide() {
 	return (
 		<div className='p-5'>
 			<div className='flex flex-col gap-3'>
-				<div className='text-2xl font-semibold '>Siampauto</div>
+				<div className='text-2xl font-semibold text-green-link leading-8'>Siampauto - Sociedade de Investimentos no Comércio de Autómoveis LDA</div>
 				<div className='text-md flex gap-2'>
 					<MapPin />
 					Avenida General Roçadas 157B, 1170-159 Lisboa
@@ -32,8 +32,10 @@ export function RightSide() {
 					<Clock />
 					<StoreHours />
 				</div>
+				<a href='https://maps.app.goo.gl/atsVtbK9zh4yAWEp8' target='_blank' className='bg-green-link hover:bg-grey-title text-white font-bold py-2 px-5 rounded-full text-center mt-2'>
+					Obter direções
+				</a>
 			</div>
-			<button className='block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl mt-6'>Obter Direções</button>
 		</div>
 	);
 }

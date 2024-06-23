@@ -10,12 +10,14 @@ export interface Vehicle {
 	Fuel: string;
 	Doors: number;
 	Color: string;
-	CC: number | string;
-	HP: number;
+	CC: string;
+	HP: string;
 	Seats: number;
-	Kms: number;
+	Kms: string;
+	WarrantyMonths: number;
 	Obs: string;
-	EquipmentList: string [];
-	Price: number;
+	EquipmentList: string[];
+	Price: string;
+	co2: number;
 	PhotoList: { Photo: string }[];
 }
