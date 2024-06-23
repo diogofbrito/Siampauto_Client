@@ -25,7 +25,7 @@ export function DashboardBar() {
 						</Link>
 					</DropdownItem>
 					<DropdownItem key='perfil' description='Veja o seu perfil e altere as suas configurações.'>
-						<Link color='foreground' href='/Profile'>
+						<Link color='foreground' href='/Perfil'>
 							Dados do utilizador
 						</Link>
 					</DropdownItem>
