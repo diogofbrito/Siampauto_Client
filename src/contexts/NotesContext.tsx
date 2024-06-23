@@ -1,95 +1,84 @@
-/*  import React, { createContext, useContext, useState, useEffect } from 'react';
-import { fetchNotes } from '../services/fetchNotes';
-import { Note } from '../types/note';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Note, NoteData } from '../types/note';
+import { fetchNotes, fetchCreateNote, fetchUpdateNote, fetchDeleteNote } from '../services/fetchNotes';
+import { useAuth } from '../contexts/AuthContext';
 
 interface NotesContextProps {
 	notes: Note[];
 	loading: boolean;
 	error: string | null;
-	fetchNotes: () => void;
-	createNote: (title: string, content: string) => void;
-	updateNote: (id: string, title: string, content: string) => void;
-	deleteNote: (id: string) => void;
+	createNote: (noteData: NoteData) => Promise<void>;
+	updateNote: (id: number, noteData: NoteData) => Promise<void>;
+	deleteNote: (id: number) => Promise<void>;
 }
 
 const NotesContext = createContext<NotesContextProps | undefined>(undefined);
 
 const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [notes, setNotes] = useState<Note[]>([]);
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
+	const { isLogged } = useAuth();
 
 	useEffect(() => {
+		let isMounted = true;
+
 		const getNotes = async () => {
 			try {
 				const data = await fetchNotes();
-				setNotes(data);
-				setLoading(false);
+				if (isMounted) {
+					setNotes(data);
+					setLoading(false);
+					setError(null);
+				}
 			} catch (err) {
-				setError('Erro ao buscar Notas.');
-				setLoading(false);
+				if (isMounted) {
+					setError('Erro ao buscar notas.');
+					setLoading(false);
+				}
 			}
 		};
 
-		getNotes();
-	}, []);
-
-	const createNote = async (title: string, content: string) => {
-		try {
-			const newNote = await createNote(title, content);
-			setNotes([...notes, newNote]);
-			setError(null);
-		} catch (error) {
-			setError('Failed to create note');
+		if (isLogged) {
+			getNotes();
 		}
-	};
 
-	const updateNote = async (id: string, title: string, content: string) => {
+		return () => {
+			isMounted = false;
+		};
+	}, [isLogged]);
+
+	const createNote = async (noteData: NoteData): Promise<void> => {
 		try {
-			await updateNote(id, title, content);
-			const updatedNotes = notes.map(note => {
-				if (note.id === id) {
-					return { ...note, title, content };
-				}
-				return note;
-			});
+			await fetchCreateNote(noteData);
+			const updatedNotes = await fetchNotes();
 			setNotes(updatedNotes);
-			setError(null);
-		} catch (error) {
-			setError('Failed to update note');
+		} catch (err) {
+			setError('Erro ao criar nota.');
 		}
 	};
 
-	const deleteNote = async (id: string) => {
+	const updateNote = async (id: number, noteData: NoteData): Promise<void> => {
 		try {
-			await deleteNote(id);
-			const filteredNotes = notes.filter(note => note.id !== id);
-			setNotes(filteredNotes);
-			setError(null);
-		} catch (error) {
-			setError('Failed to delete note');
+			await fetchUpdateNote(id, noteData);
+			const updatedNotes = await fetchNotes();
+			setNotes(updatedNotes);
+		} catch (err) {
+			setError('Erro ao atualizar nota.');
 		}
 	};
 
-	useEffect(() => {
-		fetchNotes();
-	}, []);
+	const deleteNote = async (id: number): Promise<void> => {
+		try {
+			await fetchDeleteNote(id);
+			const updatedNotes = notes.filter(note => note.id !== id);
+			setNotes(updatedNotes);
+		} catch (err) {
+			setError('Erro ao deletar nota.');
+		}
+	};
 
-	return (
-		<NotesContext.Provider
-			value={{
-				notes,
-				loading,
-				error,
-				fetchNotes,
-				createNote,
-				updateNote,
-				deleteNote,
-			}}
-		>
-			{children}
-		</NotesContext.Provider>
-	);
+	return <NotesContext.Provider value={{ notes, loading, error, createNote, updateNote, deleteNote }}>{children}</NotesContext.Provider>;
 };
 
 const useNotes = (): NotesContextProps => {
@@ -100,5 +89,4 @@ const useNotes = (): NotesContextProps => {
 	return context;
 };
 
-export { NotesProvider, useNotes }; 
- */
+export { NotesProvider, useNotes };

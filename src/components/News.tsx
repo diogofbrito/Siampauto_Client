@@ -29,7 +29,7 @@ export function News() {
 				<div className='flex flex-col gap-6'>
 					{news.map((article, index) => (
 						<div key={index} className='flex flex-col gap-6 bg-grey-boxCard rounded-xl p-5'>
-							<img src={article.multimedia?.[0]?.url} alt={article.title} className='w-full h-[240px] object-cover rounded-2xl' />
+							<img src={article.multimedia?.[0]?.url} alt={article.title} className='w-full h-[240px] object-cover rounded-md' />
 
 							<div className='flex flex-col '>
 								<div className='text-xs text-grey-title pb-2'>{article.byline}</div>

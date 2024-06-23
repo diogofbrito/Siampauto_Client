@@ -3,7 +3,6 @@ import { useAuth } from '../contexts/AuthContext';
 
 export function AuthGuard({ isPrivate = false }: { isPrivate?: boolean }) {
 	const { isLogged, loading } = useAuth();
-	console.log(isLogged);
 
 	if (loading) {
 		return <>A carregar...</>;

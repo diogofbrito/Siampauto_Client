@@ -1,16 +1,22 @@
-/* import { api } from './api';
+import { Note, NoteData } from '../types/note';
+import { api } from './api';
 
-interface Note {
-	id: number;
-	title: string;
-	date: Date;
-	content: string;
-	createdAt: Date;
-	updatedAt: Date;
+export async function fetchNotes(): Promise<Note[]> {
+    const response = await api.get<Note[]>('/notes');
+    return response.data;
 }
 
-export async function fetchNotes() {
-	const response = await api.get<Note[]>('/notes');
-	re turn response.data;
+export async function fetchCreateNote(noteData: NoteData): Promise<Note> {
+    const response = await api.post<Note>('/notes', noteData);
+    return response.data;
 }
-*/
+
+export async function fetchUpdateNote(id: number, noteData: NoteData): Promise<Note> {
+    const response = await api.put<Note>(`/notes/${id}`, noteData);
+    return response.data;
+}
+
+export async function fetchDeleteNote(id: number): Promise<void> {
+    await api.delete(`/notes/${id}`);
+}
+

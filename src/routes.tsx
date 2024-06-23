@@ -8,7 +8,6 @@ import { Welcome } from './pages/Welcome.tsx';
 import { AreaReservada } from './pages/Login.tsx';
 import { AuthGuard } from './components/AuthGuard.tsx';
 import { VehiclePage } from './pages/VehiclePage.tsx';
-import { ProfileUser } from './pages/ProfileUser.tsx';
 
 export const router = createBrowserRouter([
 	{
@@ -66,16 +65,6 @@ export const router = createBrowserRouter([
 					{
 						index: true,
 						element: <Welcome />,
-					},
-				],
-			},
-			{
-				path: '/Perfil',
-				element: <AuthGuard isPrivate={true} />,
-				children: [
-					{
-						index: true,
-						element: <ProfileUser />,
 					},
 				],
 			},

@@ -3,6 +3,7 @@ import { VehiclesProvider } from './contexts/VehiclesContext';
 import { NextUIProvider } from '@nextui-org/react';
 import { Header } from './components/Header/Header';
 import { AuthProvider } from './contexts/AuthContext';
+import { NotesProvider } from './contexts/NotesContext';
 
 function App() {
 	const navigate = useNavigate();
@@ -11,8 +12,10 @@ function App() {
 		<NextUIProvider navigate={navigate}>
 			<AuthProvider>
 				<VehiclesProvider>
+					<NotesProvider> 
 					<Header />
-					<Outlet />
+						<Outlet />
+					</NotesProvider>
 				</VehiclesProvider>
 			</AuthProvider>
 		</NextUIProvider>

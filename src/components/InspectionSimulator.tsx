@@ -25,14 +25,14 @@ export function InspectionSimulator() {
 
 			<div className='pt-4 flex flex-col gap-4 '>
 				<div>
-					<div className='block mb-2'>Insira aData da primeira matrícula</div>
+					<div className='block mb-2'>Insira a data da primeira matrícula</div>
 					<input type='date' id='registrationDate' value={registDate} onChange={e => setRegistDate(e.target.value)} className=' rounded-xl bg-grey-text text-grey-default p-2 focus:outline-none' />
 					<div className='text-white text-xs pt-2'>
 						Nota: A data da próxima inspeção, obtida neste simulador, pressupõe que a última inspeção obrigatória foi realizada. Em caso de dúvida, consulte{' '}
 						<a href='https://www.imt-ip.pt/sites/IMTT/Portugues/Veiculos/Inspecao/TiposInspeccoes/Paginas/TiposdeInspecoes.aspx' target='_blank' className='text-green-link'>aqui</a> informação adicional sobre inspeção de veículos.
 					</div>
 				</div>
-				<div>
+				<div className='flex justify-center'>
 					<button onClick={calculateNextInspection} className='bg-green-link hover:bg-grey-title text-white font-bold py-2 px-5 rounded-full text-center'>
 						Calcular
 					</button>

@@ -5,10 +5,13 @@ import { InspectionSimulator } from '../components/InspectionSimulator';
 import { CarInfoPanel } from '../components/Dashboard/VehicleInfoPanel';
 import { LiveClock } from '../components/Dashboard/LiveClock';
 import { News } from '../components/News';
+import { NotesComponent } from '../components/UserNotes/NotesComponent';
 
 export function Welcome() {
 	const { user, vehicle } = useAuth();
 	const formattedName = user ? capitalizeFirstLetter(user.fullName) : '';
+
+	
 
 	useEffect(() => {
 		if (user) {
@@ -33,14 +36,16 @@ export function Welcome() {
 				</div>
 				<LiveClock />
 			</div>
+
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
 				{vehicle && <CarInfoPanel vehicle={vehicle} />}
 				<div className=' flex flex-col gap-6'>
 					<InspectionSimulator />
-					<div className='bg-grey-default rounded-3xl p-6 '>
-					</div>
 				</div>
-					<News />
+				<News />
+			</div>
+			<div className='bg-grey-default rounded-3xl p-6 '>
+				<NotesComponent />
 			</div>
 		</div>
 	);

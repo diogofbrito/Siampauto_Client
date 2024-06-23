@@ -65,11 +65,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 			try {
 				const { data } = await api.get<ProfileData>('/profile', { headers: { Authorization: `Bearer ${token}` } });
 				setUser(data.user);
-				console.log(data.user);
 				setVehicle(data.car);
 				setIsLogged(true);
 
-				console.log(data.car);
 			} catch (err) {
 				logout();
 				console.log(err);
