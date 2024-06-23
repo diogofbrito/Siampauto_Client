@@ -11,11 +11,11 @@ import { WeatherInfoPanel } from '../components/Dashboard/WeatherInfoPanel';
 import { WhereAreWe } from '../components/WhereAreWe/WhereAreWe';
 
 export function Welcome() {
-	const { user, vehicle } = useAuth();
+	const { user, vehicle, isLogged } = useAuth();
 	const formattedName = user ? capitalizeFirstLetter(user.fullName) : '';
 
 	useEffect(() => {
-		if (user) {
+		if (user && isLogged) {
 			const script = document.createElement('script');
 			script.src = 'https://embed.tawk.to/66777a7c9d7f358570d268d0/1i11bcto2';
 			script.async = true;
@@ -26,8 +26,13 @@ export function Welcome() {
 			return () => {
 				document.body.removeChild(script);
 			};
+		} else {
+			const script = document.querySelector('script[src="https://embed.tawk.to/66777a7c9d7f358570d268d0/1i11bcto2"]');
+			if (script) {
+				document.body.removeChild(script);
+			}
 		}
-	}, [user]);
+	}, [user, isLogged]); 
 
 	return (
 		<div className='global-container'>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
-export function UserInfoPanel({ user }: { user: { fullName: string; email: string; nif: string, createdAt: string }  } ) {
+export function UserInfoPanel({ user }: { user: { fullName: string; email: string; nif: string, createdAt: Date }  } ) {
 	const formattedName = user ? capitalizeFirstLetter(user.fullName) : '';
 
 	return (
