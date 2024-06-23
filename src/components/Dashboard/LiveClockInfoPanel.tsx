@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function LiveClock() {
+export function LiveClockInfoPanel() {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {

@@ -12,8 +12,8 @@ function App() {
 		<NextUIProvider navigate={navigate}>
 			<AuthProvider>
 				<VehiclesProvider>
-					<NotesProvider> 
-					<Header />
+					<NotesProvider>
+						<Header />
 						<Outlet />
 					</NotesProvider>
 				</VehiclesProvider>

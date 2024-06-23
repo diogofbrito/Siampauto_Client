@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export function InspectionSimulator() {
+export function InspectionSimulatorInfoPanel() {
 	const [registDate, setRegistDate] = useState('');
 	const [nextInspecDate, setNextInspecDate] = useState<Date | null>(null);
 
-	function calculateNextInspection(){
+	function calculateNextInspection() {
 		const today = new Date();
 		const registDateObj = new Date(registDate);
 		const yearsSinceRegist = today.getFullYear() - registDateObj.getFullYear();
@@ -17,7 +17,7 @@ export function InspectionSimulator() {
 		} else {
 			setNextInspecDate(new Date(today.getFullYear() + 1, registDateObj.getMonth(), registDateObj.getDate()));
 		}
-	};
+	}
 
 	return (
 		<div className='rounded-3xl overflow-hidden p-6 bg-grey-default'>
@@ -29,7 +29,10 @@ export function InspectionSimulator() {
 					<input type='date' id='registrationDate' value={registDate} onChange={e => setRegistDate(e.target.value)} className=' rounded-xl bg-grey-text text-grey-default p-2 focus:outline-none' />
 					<div className='text-white text-xs pt-2'>
 						Nota: A data da próxima inspeção, obtida neste simulador, pressupõe que a última inspeção obrigatória foi realizada. Em caso de dúvida, consulte{' '}
-						<a href='https://www.imt-ip.pt/sites/IMTT/Portugues/Veiculos/Inspecao/TiposInspeccoes/Paginas/TiposdeInspecoes.aspx' target='_blank' className='text-green-link'>aqui</a> informação adicional sobre inspeção de veículos.
+						<a href='https://www.imt-ip.pt/sites/IMTT/Portugues/Veiculos/Inspecao/TiposInspeccoes/Paginas/TiposdeInspecoes.aspx' target='_blank' className='text-green-link'>
+							aqui
+						</a>{' '}
+						informação adicional sobre inspeção de veículos.
 					</div>
 				</div>
 				<div className='flex justify-center'>

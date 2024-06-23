@@ -6,6 +6,7 @@ import { ShowMoreBtn } from '../components/ShowMoreBtn';
 import { CarSearchFilter } from '../components/VehicleSearchFilter/VehicleSearchFilter';
 import { Link } from 'react-router-dom';
 import { WhereAreWe } from '../components/WhereAreWe/WhereAreWe';
+import { BrandsMarquee } from '../components/BrandsMarquee';
 
 export function Stock() {
 	const { vehicles, loading, error } = useVehicles();
@@ -20,7 +21,7 @@ export function Stock() {
 		setFilteredVehicles(vehicles.slice(0, visibleVehicles));
 	}, [vehicles, visibleVehicles]);
 
-	if (loading) return <div>A carregar...</div>;
+	if (loading) return <div >A carregar...</div>;
 	if (error) return <div>{error}</div>;
 
 	return (
@@ -29,6 +30,8 @@ export function Stock() {
 				<div className='text-4xl font-bold mb-4 text-white'>As nossas melhores ofertas.</div>
 				<div className='text-2xl text-green-link'>Excelentes oportunidades para si.</div>
 			</div>
+
+			<BrandsMarquee />
 
 			<CarSearchFilter onSearch={setFilteredVehicles} />
 

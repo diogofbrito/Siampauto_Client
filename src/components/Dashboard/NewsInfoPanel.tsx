@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react';
-import { fetchAutomobilesNews } from '../services/fetchNews';
+import { fetchAutomobilesNews } from '../../services/fetchNews';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
-import { New } from '../types/new';
+import { New } from '../../types/new';
 
-export function News() {
+export function NewsInfoPanel() {
 	const [news, setNews] = useState<New[]>([]);
 
 	useEffect(() => {
 		async function fetchData() {
 			const result = await fetchAutomobilesNews();
 			setNews(result);
-
 		}
 		fetchData();
 	}, []);
 
 	return (
 		<div className='text-white rounded-3xl bg-grey-default p-6'>
-			<div className=' text-gray-500 pb-4'>
+			<div className=' text-gray-500 pb-4 '>
 				Últimas noticias do mercado automóvel
 				<div className='text-xs'>
 					<a href='https://www.nytimes.com/' target='_blank' rel='noopener noreferrer'>
@@ -25,7 +24,7 @@ export function News() {
 					</a>
 				</div>
 			</div>
-			<ScrollShadow className='w-[100%] h-[650px]'>
+			<ScrollShadow className='w-[100%] h-[760px]'>
 				<div className='flex flex-col gap-6'>
 					{news.map((article, index) => (
 						<div key={index} className='flex flex-col gap-6 bg-grey-boxCard rounded-xl p-5'>

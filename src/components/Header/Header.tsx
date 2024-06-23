@@ -26,7 +26,7 @@ export function Header() {
 						</Link>
 					</NavbarItem>
 					<NavbarItem>
-						<Link href='#' className='text-white'>
+						<Link href='/Servicos' className='text-white'>
 							Serviços
 						</Link>
 					</NavbarItem>

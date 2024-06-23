@@ -1,6 +1,8 @@
 import { useAuth } from '../contexts/AuthContext';
+import DeleteBtn from '../components/DeleteUser/DeleteBtn';
+
 export function ProfileUser() {
-	const { user } = useAuth();
+	const { user, logout } = useAuth();
 	return (
 		<div className='flex flex-col text-white p-24'>
 			<div className='rounded-3xl overflow-hidden p-6 bg-grey-default'>
@@ -13,7 +15,8 @@ export function ProfileUser() {
 								</div>
 							)}
 					</div>
-					<button className='text-xs bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full'>Eliminar conta</button>
+					<DeleteBtn logout={logout}/>
+					
 				</div>
 				<div className='mt-4'>
 					<div className='text-md mb-4 text-white'>Nome {user?.fullName}</div>

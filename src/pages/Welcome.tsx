@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
-import { InspectionSimulator } from '../components/InspectionSimulator';
+import { InspectionSimulatorInfoPanel } from '../components/Dashboard/InspectionSimulatorInfoPanel';
 import { CarInfoPanel } from '../components/Dashboard/VehicleInfoPanel';
-import { LiveClock } from '../components/Dashboard/LiveClock';
-import { News } from '../components/News';
+import { LiveClockInfoPanel } from '../components/Dashboard/LiveClockInfoPanel';
+import { NewsInfoPanel } from '../components/Dashboard/NewsInfoPanel';
 import { NotesComponent } from '../components/UserNotes/NotesComponent';
 import { UserInfoPanel } from '../components/Dashboard/UserInfoPanel';
+import { WeatherInfoPanel } from '../components/Dashboard/WeatherInfoPanel';
 
 export function Welcome() {
 	const { user, vehicle } = useAuth();
 	const formattedName = user ? capitalizeFirstLetter(user.fullName) : '';
-
-	
 
 	useEffect(() => {
 		if (user) {
@@ -35,16 +34,17 @@ export function Welcome() {
 				<div>
 					Bem vindo <span className='text-green-link'>{formattedName}</span>
 				</div>
-				<LiveClock />
+				<LiveClockInfoPanel />
 			</div>
 
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
 				{vehicle && <CarInfoPanel vehicle={vehicle} />}
 				<div className=' flex flex-col gap-6'>
-					<InspectionSimulator />
-					{user && <UserInfoPanel user={user}/>}
+					<InspectionSimulatorInfoPanel />
+					{user && <UserInfoPanel user={user} />}
+					<WeatherInfoPanel />
 				</div>
-				<News />
+				<NewsInfoPanel />
 			</div>
 			<div className='bg-grey-default rounded-3xl p-6 '>
 				<NotesComponent />
